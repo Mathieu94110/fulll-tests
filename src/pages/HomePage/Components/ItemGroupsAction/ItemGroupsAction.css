@@ -1,0 +1,11 @@
+.item-groups-action {
+  height: 64px;
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+.item-groups-action-checkbox {
+  transform: scale(1.5);
+  margin-right: 10px;
+}

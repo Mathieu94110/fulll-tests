@@ -1,0 +1,27 @@
+.user-card-item {
+  width: 100px;
+  text-align: center;
+  padding: 0px 10px;
+  border-radius: 5px;
+  position: relative;
+  background-color: var(--gray-2);
+}
+.user-card-item-checkbox {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+.user-card-item-img {
+  width: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  height: 40px;
+  margin: 10px 0px;
+}
+.user-card-item-input-button {
+  background-color: rgb(58, 173, 255);
+  border-radius: 5px;
+  border-width: 0px;
+  padding: 5px 10px;
+  margin: 10px 0px 20px;
+}
