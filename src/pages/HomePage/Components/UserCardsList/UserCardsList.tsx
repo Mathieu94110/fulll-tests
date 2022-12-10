@@ -1,30 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import UserCardItem from './Components/UserCardItem/UserCardItem';
 import './UserCardsList.css';
+import { UsersInterface } from '../../../../interfaces/users.interface';
 
-function UserCardsList() {
+function UserCardsList({ usersList }: { usersList: UsersInterface[] }) {
+  useEffect(() => {
+    console.log(usersList);
+  });
   return (
     <div className="user-cards-list">
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
-      <UserCardItem />
+      {usersList &&
+        usersList.map((user: UsersInterface, index: number) => (
+          <UserCardItem key={index} userInfos={user} />
+        ))}
     </div>
   );
 }
