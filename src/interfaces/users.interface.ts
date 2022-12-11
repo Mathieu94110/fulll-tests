@@ -24,6 +24,8 @@ export interface GithubApiSearchInterface {
   incomplete_results: boolean;
   items: UsersInterface[];
   total_count: number;
+  message: string;
+  documentation_url: string;
 }
 
 export interface selectedUsersInterface {

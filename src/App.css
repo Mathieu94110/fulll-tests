@@ -1,10 +1,26 @@
 :root {
   --gray-1: #8a8a8a;
   --gray-2: #cdcdcd;
+  --red-1: #d62a2a;
 }
 
 body {
   min-height: 100vh;
+}
+
+.api-rate-error {
+  font-weight: 600;
+  color: var(--red-1);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.api-no-results {
+  font-weight: 600;
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
 }
 
 .text-color {

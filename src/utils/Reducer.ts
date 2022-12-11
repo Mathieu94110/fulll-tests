@@ -11,7 +11,23 @@ function itemsReducer(state: usersInitialInterface, action: ACTIONTYPE) {
     case 'SET_USERS_INFO':
       return {
         ...state,
+        error: '',
+        noResults: false,
         users: action.payload,
+      };
+    case 'SET_NO_RESULTS':
+      return {
+        ...state,
+        error: '',
+        users: [],
+        noResults: action.payload,
+      };
+    case 'SET_API_RATE_MESSAGE':
+      return {
+        ...state,
+        users: [],
+        noResults: false,
+        error: action.payload,
       };
     case 'SET_FILTER':
       return {

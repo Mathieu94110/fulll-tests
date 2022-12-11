@@ -2,6 +2,7 @@ import React from 'react';
 import './UserCardItem.css';
 // import logo from '../../../../../../assets/images/logo192.png';
 import { UsersInterface } from 'interfaces/users.interface';
+import { Event } from 'ws';
 
 function UserCardItem({
   userInfos,
@@ -10,8 +11,11 @@ function UserCardItem({
   userInfos: UsersInterface;
   setCheckedInfo: Function;
 }) {
-  const handleClick = () => {
+  const toggle = () => {
     setCheckedInfo(userInfos.id);
+  };
+  const openInNewTab = (url: string): void => {
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -19,7 +23,7 @@ function UserCardItem({
       <input
         type="checkbox"
         className="user-card-item-checkbox"
-        onClick={handleClick}
+        onClick={toggle}
       />
       <img
         src={userInfos.avatar_url}
@@ -32,6 +36,7 @@ function UserCardItem({
         type="button"
         className="user-card-item-input-button font-small"
         value="View profile"
+        onClick={() => openInNewTab(userInfos.html_url)}
       />
     </div>
   );

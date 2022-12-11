@@ -5,9 +5,11 @@ import { UsersInterface } from '../../../../interfaces/users.interface';
 
 function UserCardsList({
   usersList,
+  selected,
   setCheckedInfo,
 }: {
   usersList: UsersInterface[];
+  selected: UsersInterface[];
   setCheckedInfo: Function;
 }) {
   const setCheckedId = (value: number) => {
@@ -15,16 +17,24 @@ function UserCardsList({
   };
 
   return (
-    <div className="user-cards-list">
-      {usersList &&
-        usersList.map((user: UsersInterface, index: number) => (
-          <UserCardItem
-            key={index}
-            userInfos={user}
-            setCheckedInfo={setCheckedId}
-          />
-        ))}
-    </div>
+    <>
+      {!!usersList.length && (
+        <div
+          className="user-cards-list"
+          style={{
+            top: selected.length ? '212px' : '148px',
+          }}
+        >
+          {usersList.map((user: UsersInterface, index: number) => (
+            <UserCardItem
+              key={index}
+              userInfos={user}
+              setCheckedInfo={setCheckedId}
+            />
+          ))}
+        </div>
+      )}
+    </>
   );
 }
 
