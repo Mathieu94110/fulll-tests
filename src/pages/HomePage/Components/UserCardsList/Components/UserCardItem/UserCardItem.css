@@ -5,7 +5,13 @@
   border-radius: 5px;
   position: relative;
   background-color: var(--gray-2);
+  min-height: 170px;
 }
+
+.user-card-item > p {
+  overflow-wrap: break-word;
+}
+
 .user-card-item-checkbox {
   position: absolute;
   left: 10px;

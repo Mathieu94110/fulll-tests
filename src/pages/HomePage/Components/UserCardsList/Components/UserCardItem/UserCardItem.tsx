@@ -3,10 +3,24 @@ import './UserCardItem.css';
 // import logo from '../../../../../../assets/images/logo192.png';
 import { UsersInterface } from 'interfaces/users.interface';
 
-function UserCardItem({ userInfos }: { userInfos: UsersInterface }) {
+function UserCardItem({
+  userInfos,
+  setCheckedInfo,
+}: {
+  userInfos: UsersInterface;
+  setCheckedInfo: Function;
+}) {
+  const handleClick = () => {
+    setCheckedInfo(userInfos.id);
+  };
+
   return (
     <div className="user-card-item box-shadow">
-      <input type="checkbox" className="user-card-item-checkbox" />
+      <input
+        type="checkbox"
+        className="user-card-item-checkbox"
+        onClick={handleClick}
+      />
       <img
         src={userInfos.avatar_url}
         className="user-card-item-img"

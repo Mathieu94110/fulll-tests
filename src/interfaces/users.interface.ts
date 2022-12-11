@@ -18,9 +18,15 @@ export interface UsersInterface {
   type: string;
   site_admin: boolean;
   score: number;
+  selected: boolean;
 }
 export interface GithubApiSearchInterface {
   incomplete_results: boolean;
   items: UsersInterface[];
   total_count: number;
+}
+
+export interface selectedUsersInterface {
+  id: number;
+  checked: boolean;
 }

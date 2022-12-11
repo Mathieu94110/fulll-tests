@@ -18,6 +18,20 @@ function itemsReducer(state: usersInitialInterface, action: ACTIONTYPE) {
         ...state,
         filters: action.payload,
       };
+    case 'SET_SELECTED':
+      return {
+        ...state,
+        users: state.users.map((u) =>
+          u.id !== action.payload ? u : { ...u, selected: !u.selected }
+        ),
+      };
+    case 'SET_DELETE':
+      return {
+        ...state,
+        users: state.users.filter(
+          (user) => !action.payload.some((id) => user.id === id)
+        ),
+      };
     default: {
       throw new Error('action inconnue');
     }

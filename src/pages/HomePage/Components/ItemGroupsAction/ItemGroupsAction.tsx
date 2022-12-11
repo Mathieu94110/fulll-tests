@@ -1,12 +1,26 @@
+import { UsersInterface } from 'interfaces/users.interface';
 import React from 'react';
 import './ItemGroupsAction.css';
 
-function ItemGroupsAction() {
+function ItemGroupsAction({
+  selected,
+  deleteSelectedUsers,
+}: {
+  selected: UsersInterface[];
+  deleteSelectedUsers: Function;
+}) {
+  function handleDelete() {
+    const usersToRemoved = selected.map((user) => user.id);
+    deleteSelectedUsers(usersToRemoved);
+  }
+
   return (
     <div className="item-groups-action">
       <div>
         <input type="checkbox" className="item-groups-action-checkbox" />
-        <span className="font-medium">3 elements selected</span>
+        <span className="font-medium">
+          {selected.length + ' elements selected'}{' '}
+        </span>
       </div>
       <div>
         <span>
@@ -15,7 +29,7 @@ function ItemGroupsAction() {
         </span>
         <span className="ml-10">
           {' '}
-          <i className="fa-regular fa-trash-can"></i>
+          <i className="fa-regular fa-trash-can" onClick={handleDelete}></i>
         </span>
       </div>
     </div>

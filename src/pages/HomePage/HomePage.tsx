@@ -17,6 +17,7 @@ function HomePage() {
   const userInfos = state.users;
   const filter = state.filters;
   const isLoading = state.isLoading;
+  const selectedItems = state.users.filter((user) => user.selected === true);
 
   useEffect(() => {
     dispatch({
@@ -27,13 +28,17 @@ function HomePage() {
     let cancel = false;
     githubSearchApi
       .getUsersProfiles(filter)
-      .then((usersInfo?: GithubApiSearchInterface) => {
-        console.log(usersInfo);
+      .then((users?: GithubApiSearchInterface) => {
         if (!cancel) {
-          if (typeof usersInfo !== 'undefined') {
+          if (typeof users !== 'undefined') {
+            const selectedProperty: { selected: boolean } = { selected: false };
+            const uniqUsers = new Set(users.items.map((user) => user));
+            const uniqUsersInArray = Array.from(uniqUsers).map((user) =>
+              Object.assign(user, selectedProperty)
+            );
             dispatch({
               type: 'SET_USERS_INFO',
-              payload: usersInfo.items,
+              payload: uniqUsersInArray,
             });
           }
         }
@@ -55,16 +60,33 @@ function HomePage() {
       payload: value,
     });
   }
+  function setCheckedInfo(value: number) {
+    dispatch({
+      type: 'SET_SELECTED',
+      payload: value,
+    });
+  }
 
+  function deleteSelectedUsers(users: number[]) {
+    dispatch({
+      type: 'SET_DELETE',
+      payload: users,
+    });
+  }
   return (
     <div className="home-page">
       <Header />
       <Search setFilter={setFilter} />
-      <ItemGroupsAction />
+      {!!selectedItems.length && (
+        <ItemGroupsAction
+          selected={selectedItems}
+          deleteSelectedUsers={deleteSelectedUsers}
+        />
+      )}
       {isLoading && !userInfos ? (
         <Loading />
       ) : (
-        <UserCardsList usersList={userInfos} />
+        <UserCardsList usersList={userInfos} setCheckedInfo={setCheckedInfo} />
       )}
     </div>
   );
