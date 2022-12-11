@@ -32,6 +32,7 @@ function itemsReducer(state: usersInitialInterface, action: ACTIONTYPE) {
     case 'SET_FILTER':
       return {
         ...state,
+        users: [],
         filters: action.payload,
       };
     case 'SET_SELECTED':
@@ -41,6 +42,21 @@ function itemsReducer(state: usersInitialInterface, action: ACTIONTYPE) {
           u.id !== action.payload ? u : { ...u, selected: !u.selected }
         ),
       };
+    case 'SELECT_ALL':
+      return {
+        ...state,
+        users: state.users.map((u) =>
+          u.selected === true ? u : { ...u, selected: true }
+        ),
+      };
+    case 'UNSELECT_ALL':
+      return {
+        ...state,
+        users: state.users.map((u) =>
+          u.selected === false ? u : { ...u, selected: false }
+        ),
+      };
+
     case 'SET_DELETE':
       return {
         ...state,

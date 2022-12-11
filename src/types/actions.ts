@@ -10,4 +10,6 @@ export type ACTIONTYPE =
   | { type: 'SET_FILTER'; payload: string }
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_SELECTED'; payload: number }
+  | { type: 'SELECT_ALL' }
+  | { type: 'UNSELECT_ALL' }
   | { type: 'SET_DELETE'; payload: number[] };

@@ -2,16 +2,29 @@
   margin: 5px;
   padding: 30px;
   border: 2px solid #000;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
-  place-items: center;
-  flex-grow: 1;
+  display: block;
   overflow-y: scroll;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.user-cards-list-checkbox {
+  margin-left: 10px;
+}
+.user-cards-list-selector {
+  display: flex;
+  height: 40px;
+  font-weight: 600;
+  align-items: center;
+}
+.user-cards-list-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  place-items: center;
+  flex-grow: 1;
 }
 
 ::-webkit-scrollbar {
@@ -25,13 +38,13 @@
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
-  .user-cards-list {
+  .user-cards-list-items {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-columns: repeat(3, 1fr);
   }
 }
 @media (min-width: 1200px) {
-  .user-cards-list {
+  .user-cards-list-items {
     grid-template-columns: repeat(4, 1fr);
     grid-auto-columns: repeat(4, 1fr);
   }

@@ -1,8 +1,6 @@
 import React from 'react';
 import './UserCardItem.css';
-// import logo from '../../../../../../assets/images/logo192.png';
 import { UsersInterface } from 'interfaces/users.interface';
-import { Event } from 'ws';
 
 function UserCardItem({
   userInfos,
@@ -23,7 +21,8 @@ function UserCardItem({
       <input
         type="checkbox"
         className="user-card-item-checkbox"
-        onClick={toggle}
+        onChange={toggle}
+        checked={userInfos.selected}
       />
       <img
         src={userInfos.avatar_url}

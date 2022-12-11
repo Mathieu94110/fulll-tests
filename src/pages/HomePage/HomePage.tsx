@@ -96,6 +96,20 @@ function HomePage() {
     });
   }
 
+  function setSelectAll(value: string) {
+    if (value === 'select') {
+      dispatch({
+        type: 'SELECT_ALL',
+      });
+    } else if (value === 'unselect') {
+      dispatch({
+        type: 'UNSELECT_ALL',
+      });
+    } else {
+      throw new Error('setSelectAll value is non valid');
+    }
+  }
+
   function deleteSelectedUsers(users: number[]) {
     dispatch({
       type: 'SET_DELETE',
@@ -121,6 +135,7 @@ function HomePage() {
           usersList={userInfos}
           selected={selectedItems}
           setCheckedInfo={setCheckedInfo}
+          setSelectAll={setSelectAll}
         />
       )}
     </div>
