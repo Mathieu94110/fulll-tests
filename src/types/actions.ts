@@ -1,7 +1,4 @@
-import {
-  UsersInterface,
-  // selectedUsersInterface,
-} from 'interfaces/users.interface';
+import { UsersInterface } from 'interfaces/users.interface';
 
 export type ACTIONTYPE =
   | { type: 'SET_USERS_INFO'; payload: UsersInterface[] }
@@ -13,4 +10,5 @@ export type ACTIONTYPE =
   | { type: 'SELECT_ALL' }
   | { type: 'UNSELECT_ALL' }
   | { type: 'SET_DELETE'; payload: number[] }
-  | { type: 'ADD_COPIED_USERS'; payload: UsersInterface[] };
+  | { type: 'ADD_COPIED_USERS'; payload: UsersInterface[] }
+  | { type: 'SET_EDIT_MODE'; payload: boolean };

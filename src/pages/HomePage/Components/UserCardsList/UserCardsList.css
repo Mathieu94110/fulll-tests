@@ -13,11 +13,11 @@
 .user-cards-list-checkbox {
   margin-left: 10px;
 }
-.user-cards-list-selector {
+.user-cards-list-selectors {
   display: flex;
+  justify-content: space-between;
   height: 40px;
   font-weight: 600;
-  align-items: center;
 }
 .user-cards-list-items {
   display: grid;

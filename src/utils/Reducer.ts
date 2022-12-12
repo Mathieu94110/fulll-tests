@@ -33,6 +33,8 @@ function itemsReducer(state: usersInitialInterface, action: ACTIONTYPE) {
       return {
         ...state,
         users: [],
+        isLoading: true,
+        isEditMode: false,
         filters: action.payload,
       };
     case 'SET_SELECTED':
@@ -68,6 +70,14 @@ function itemsReducer(state: usersInitialInterface, action: ACTIONTYPE) {
       return {
         ...state,
         users: [...state.users, ...action.payload],
+      };
+    case 'SET_EDIT_MODE':
+      return {
+        ...state,
+        isEditMode: action.payload,
+        users: state.users.map((u) =>
+          u.selected === false ? u : { ...u, selected: false }
+        ),
       };
     default: {
       throw new Error('action inconnue');

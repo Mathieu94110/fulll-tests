@@ -5,9 +5,11 @@ import { UsersInterface } from 'interfaces/users.interface';
 function UserCardItem({
   userInfos,
   setCheckedInfo,
+  isEditMode,
 }: {
   userInfos: UsersInterface;
   setCheckedInfo: Function;
+  isEditMode: boolean;
 }) {
   const toggle = () => {
     setCheckedInfo(userInfos.id);
@@ -18,12 +20,14 @@ function UserCardItem({
 
   return (
     <div className="user-card-item box-shadow">
-      <input
-        type="checkbox"
-        className="user-card-item-checkbox"
-        onChange={toggle}
-        checked={userInfos.selected}
-      />
+      {isEditMode && (
+        <input
+          type="checkbox"
+          className="user-card-item-checkbox"
+          onChange={toggle}
+          checked={userInfos.selected}
+        />
+      )}
       <img
         src={userInfos.avatar_url}
         className="user-card-item-img"

@@ -8,7 +8,7 @@ import {
   GithubApiSearchInterface,
   UsersInterface,
 } from 'interfaces/users.interface';
-import itemsReducer from '../../utils/Reducer';
+import itemsReducer from '../../utils/reducer';
 import Loading from '../../components/Loading/Loading';
 
 function HomePage() {
@@ -18,6 +18,7 @@ function HomePage() {
     isLoading: false,
     error: '',
     noResults: false,
+    isEditMode: false,
   });
   const userInfos = state.users;
   const filter = state.filters;
@@ -25,14 +26,9 @@ function HomePage() {
   const selectedItems = state.users.filter((user) => user.selected === true);
   const error = state.error;
   const noResults = state.noResults;
-
+  const isEditMode = state.isEditMode;
   useEffect(() => {
     if (filter) {
-      dispatch({
-        type: 'SET_LOADING',
-        payload: true,
-      });
-      // Cancel below is used in order to avoid performing request twice
       let cancel = false;
       githubSearchApi
         .getUsersProfiles(filter)
@@ -96,6 +92,22 @@ function HomePage() {
     });
   }
 
+  function setEditMode(value: string) {
+    if (value === 'on') {
+      dispatch({
+        type: 'SET_EDIT_MODE',
+        payload: true,
+      });
+    } else if (value === 'off') {
+      dispatch({
+        type: 'SET_EDIT_MODE',
+        payload: false,
+      });
+    } else {
+      throw new Error('setEditMode value is non valid');
+    }
+  }
+
   function setSelectAll(value: string) {
     if (value === 'select') {
       dispatch({
@@ -129,21 +141,23 @@ function HomePage() {
       <Search setFilter={setFilter} />
       {error && <h2 className="api-rate-error">{error}</h2>}
       {noResults && <h2 className="api-no-results">No results found</h2>}
-      {!!selectedItems.length && (
+      {!!selectedItems.length && isEditMode && (
         <ItemGroupsAction
           selected={selectedItems}
           copySelectedUsers={copySelectedUsers}
           deleteSelectedUsers={deleteSelectedUsers}
         />
       )}
-      {isLoading && !userInfos ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <UserCardsList
           usersList={userInfos}
           selected={selectedItems}
+          setEditMode={setEditMode}
           setCheckedInfo={setCheckedInfo}
           setSelectAll={setSelectAll}
+          isEditMode={isEditMode}
         />
       )}
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './ItemGroupsAction.css';
 import { UsersInterface } from 'interfaces/users.interface';
-import { deepCopy } from '../../../../utils/DeepCopy';
+import { deepCopy } from '../../../../utils/deepCopy';
 
 function ItemGroupsAction({
   selected,

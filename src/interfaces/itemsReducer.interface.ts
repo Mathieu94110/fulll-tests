@@ -6,4 +6,5 @@ export interface usersInitialInterface {
   filters: string;
   isLoading: boolean;
   error: string;
+  isEditMode: boolean;
 }

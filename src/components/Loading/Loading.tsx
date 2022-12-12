@@ -4,7 +4,7 @@ import './Loading.css';
 function Loading() {
   return (
     <div className="loading">
-      <i className={`fa-solid fa-spinner spinner`}></i>
+      <i className={`fa-solid fa-spinner loading-spinner`}></i>
     </div>
   );
 }

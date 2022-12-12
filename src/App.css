@@ -2,6 +2,8 @@
   --gray-1: #8a8a8a;
   --gray-2: #cdcdcd;
   --red-1: #d62a2a;
+  --spinner-size: 2rem;
+  --spinner-color: #4760d0;
 }
 
 body {
