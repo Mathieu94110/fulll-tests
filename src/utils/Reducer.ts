@@ -64,6 +64,11 @@ function itemsReducer(state: usersInitialInterface, action: ACTIONTYPE) {
           (user) => !action.payload.some((id) => user.id === id)
         ),
       };
+    case 'ADD_COPIED_USERS':
+      return {
+        ...state,
+        users: [...state.users, ...action.payload],
+      };
     default: {
       throw new Error('action inconnue');
     }

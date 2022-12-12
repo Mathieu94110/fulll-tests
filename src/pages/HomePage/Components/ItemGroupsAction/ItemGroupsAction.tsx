@@ -1,17 +1,25 @@
-import { UsersInterface } from 'interfaces/users.interface';
 import React from 'react';
 import './ItemGroupsAction.css';
+import { UsersInterface } from 'interfaces/users.interface';
+import { deepCopy } from '../../../../utils/DeepCopy';
 
 function ItemGroupsAction({
   selected,
   deleteSelectedUsers,
+  copySelectedUsers,
 }: {
   selected: UsersInterface[];
   deleteSelectedUsers: Function;
+  copySelectedUsers: Function;
 }) {
   function handleDelete() {
     const usersToRemoved = selected.map((user) => user.id);
     deleteSelectedUsers(usersToRemoved);
+  }
+  async function handleCopy() {
+    const usersToCopy = selected;
+    const CopiedUsers = await deepCopy(usersToCopy);
+    copySelectedUsers(CopiedUsers);
   }
 
   return (
@@ -25,7 +33,7 @@ function ItemGroupsAction({
       <div>
         <span>
           {' '}
-          <i className="fa-regular fa-copy"></i>
+          <i className="fa-regular fa-copy" onClick={handleCopy}></i>
         </span>
         <span className="ml-10">
           {' '}

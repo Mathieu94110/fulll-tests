@@ -110,6 +110,13 @@ function HomePage() {
     }
   }
 
+  function copySelectedUsers(users: UsersInterface[]) {
+    dispatch({
+      type: 'ADD_COPIED_USERS',
+      payload: users,
+    });
+  }
+
   function deleteSelectedUsers(users: number[]) {
     dispatch({
       type: 'SET_DELETE',
@@ -125,6 +132,7 @@ function HomePage() {
       {!!selectedItems.length && (
         <ItemGroupsAction
           selected={selectedItems}
+          copySelectedUsers={copySelectedUsers}
           deleteSelectedUsers={deleteSelectedUsers}
         />
       )}

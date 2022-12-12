@@ -12,4 +12,5 @@ export type ACTIONTYPE =
   | { type: 'SET_SELECTED'; payload: number }
   | { type: 'SELECT_ALL' }
   | { type: 'UNSELECT_ALL' }
-  | { type: 'SET_DELETE'; payload: number[] };
+  | { type: 'SET_DELETE'; payload: number[] }
+  | { type: 'ADD_COPIED_USERS'; payload: UsersInterface[] };
