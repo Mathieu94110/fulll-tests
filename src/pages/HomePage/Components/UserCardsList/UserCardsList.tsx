@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef, ChangeEvent } from 'react';
 import UserCardItem from './Components/UserCardItem/UserCardItem';
 import './UserCardsList.css';
 import { UsersInterface } from '../../../../interfaces/users.interface';
@@ -14,22 +14,15 @@ function UserCardsList({
   setCheckedInfo: Function;
   setSelectAll: Function;
 }) {
-  const [allSelectMode, setAllSelectMode] = useState('unselect');
-  const isFirstRender = useRef(true);
+  const isAllCheckedRef = useRef<HTMLInputElement>(null);
 
-  const switchAllSelectMode = () => {
-    allSelectMode === 'unselect'
-      ? setAllSelectMode('select')
-      : setAllSelectMode('unselect');
-  };
-
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return; // in order to avoit first useless setSelectAll call
+  const handleCheckedAll = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      setSelectAll('select');
+    } else {
+      setSelectAll('unselect');
     }
-    setSelectAll(allSelectMode);
-  }, [allSelectMode]);
+  };
 
   const setCheckedId = (value: number) => {
     setCheckedInfo(value);
@@ -45,12 +38,17 @@ function UserCardsList({
           }}
         >
           <div className="user-cards-list-selector">
-            {allSelectMode === 'unselect' ? 'Select all:' : 'Unselect all:'}
-            <input
-              type="checkbox"
-              className="user-cards-list-checkbox"
-              onChange={switchAllSelectMode}
-            />
+            <label>
+              {isAllCheckedRef.current && isAllCheckedRef.current['checked']
+                ? 'Unselect all:'
+                : 'Select all:'}
+              <input
+                ref={isAllCheckedRef}
+                type="checkbox"
+                className="user-cards-list-checkbox"
+                onChange={handleCheckedAll}
+              />
+            </label>
           </div>
           <div className="user-cards-list-items">
             {usersList.map((user: UsersInterface, index: number) => (
