@@ -18,6 +18,7 @@ function EditModeButton({
         Edit
         <div
           className="edit-mode-button-switch"
+          data-testid="div-styled"
           style={{
             background:
               isToggleCheckedRef.current &&
@@ -28,6 +29,7 @@ function EditModeButton({
         >
           <input
             type="checkbox"
+            data-testid="edit-mode-button"
             ref={isToggleCheckedRef}
             onChange={handleToggleCheck}
           />{' '}

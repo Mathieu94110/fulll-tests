@@ -10,9 +10,11 @@ function Search({ setFilter }: { setFilter: (x: string) => void }) {
     <div className="search">
       <input
         onInput={handleInput}
+        aria-label="search-input"
         className="search-input"
         type="text"
         placeholder="Search input"
+        name="search-input"
       />
     </div>
   );

@@ -21,6 +21,7 @@ function UserCardItem({
     <div className="user-card-item box-shadow">
       {isEditMode && (
         <input
+          data-testid="card-checkbox"
           type="checkbox"
           className="user-card-item-checkbox"
           onChange={toggle}

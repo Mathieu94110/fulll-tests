@@ -24,11 +24,7 @@ function ItemGroupsAction({
   return (
     <div className="item-groups-action">
       <div>
-        <input
-          type="checkbox"
-          checked={false}
-          className="item-groups-action-checkbox"
-        />
+        <input type="checkbox" className="item-groups-action-checkbox" />
         <span className="font-medium">
           {selected.length + ' elements selected'}{' '}
         </span>
