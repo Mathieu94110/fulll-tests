@@ -1,4 +1,4 @@
-import { usersInitialInterface } from 'interfaces/itemsReducer.interface';
+import { usersInitialInterface } from 'interfaces/items-reducer.interface';
 import { ACTIONTYPE } from 'types/actions';
 
 function itemsReducer(state: usersInitialInterface, action: ACTIONTYPE) {

@@ -29,6 +29,7 @@ function HomePage() {
   const isEditMode = state.isEditMode;
   useEffect(() => {
     if (filter) {
+      // cancel on below is used in order to avoid make same request twice
       let cancel = false;
       githubSearchApi
         .getUsersProfiles(filter)
