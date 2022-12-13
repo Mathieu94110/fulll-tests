@@ -1,4 +1,3 @@
-import React from 'react';
 import './ItemGroupsAction.css';
 import { UsersInterface } from 'interfaces/users.interface';
 import { deepCopy } from '../../../../utils/deepCopy';
@@ -9,14 +8,14 @@ function ItemGroupsAction({
   copySelectedUsers,
 }: {
   selected: UsersInterface[];
-  deleteSelectedUsers: Function;
-  copySelectedUsers: Function;
+  deleteSelectedUsers: (x: number[]) => void;
+  copySelectedUsers: (x: UsersInterface[]) => void;
 }) {
-  function handleDelete() {
+  function handleDelete(): void {
     const usersToRemoved = selected.map((user) => user.id);
     deleteSelectedUsers(usersToRemoved);
   }
-  async function handleCopy() {
+  async function handleCopy(): Promise<void> {
     const usersToCopy = selected;
     const CopiedUsers = await deepCopy(usersToCopy);
     copySelectedUsers(CopiedUsers);
@@ -25,7 +24,11 @@ function ItemGroupsAction({
   return (
     <div className="item-groups-action">
       <div>
-        <input type="checkbox" className="item-groups-action-checkbox" />
+        <input
+          type="checkbox"
+          checked={false}
+          className="item-groups-action-checkbox"
+        />
         <span className="font-medium">
           {selected.length + ' elements selected'}{' '}
         </span>

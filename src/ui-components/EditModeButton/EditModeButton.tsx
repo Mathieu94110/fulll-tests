@@ -1,12 +1,17 @@
-import React, { useRef, ChangeEvent } from 'react';
-
+import { useRef, ChangeEvent } from 'react';
 import './EditModeButton.css';
 
-function EditModeButton({ switchMode }: { switchMode: Function }) {
+function EditModeButton({
+  switchMode,
+}: {
+  switchMode: (x: ChangeEvent<HTMLInputElement>) => void;
+}) {
   const isToggleCheckedRef = useRef<HTMLInputElement>(null);
-  const handleToggleCheck = (event: ChangeEvent<HTMLInputElement>) => {
-    switchMode(event);
-  };
+
+  function handleToggleCheck(e: ChangeEvent<HTMLInputElement>): void {
+    switchMode(e);
+  }
+
   return (
     <div className="edit-mode-button-wrapper">
       <label>

@@ -1,15 +1,15 @@
-import React, { useEffect, useReducer } from 'react';
-import Header from 'components/Header/Header';
-import Search from './Components/Search/Search';
-import ItemGroupsAction from './Components/ItemGroupsAction/ItemGroupsAction';
-import UserCardsList from './Components/UserCardsList/UserCardsList';
+import { useEffect, useReducer } from 'react';
+import Header from '../../ui-components/Header/Header';
+import Search from '../../ui-components/Search/Search';
+import ItemGroupsAction from './components/ItemGroupsAction/ItemGroupsAction';
+import UserCardsList from './components/UserCardsList/UserCardsList';
 import githubSearchApi from '../../api/search';
 import {
   GithubApiSearchInterface,
   UsersInterface,
 } from 'interfaces/users.interface';
 import itemsReducer from '../../utils/reducer';
-import Loading from '../../components/Loading/Loading';
+import Loading from '../../ui-components/Loading/Loading';
 
 function HomePage() {
   const [state, dispatch] = useReducer(itemsReducer, {
@@ -20,20 +20,19 @@ function HomePage() {
     noResults: false,
     isEditMode: false,
   });
-  const userInfos = state.users;
-  const filter = state.filters;
-  const isLoading = state.isLoading;
-  const selectedItems = state.users.filter((user) => user.selected === true);
-  const error = state.error;
-  const noResults = state.noResults;
-  const isEditMode = state.isEditMode;
+
+  const { users, filters, isLoading, error, noResults, isEditMode } = state;
+  let selectedItems = users.filter(
+    (user: UsersInterface) => user.selected === true
+  );
+
   useEffect(() => {
-    if (filter) {
+    if (filters) {
       // cancel on below is used in order to avoid make same request twice
       let cancel = false;
       githubSearchApi
-        .getUsersProfiles(filter)
-        .then((data?: GithubApiSearchInterface) => {
+        .getUsersProfiles(filters)
+        .then((data?: GithubApiSearchInterface): void => {
           if (data?.message) {
             dispatch({
               type: 'SET_API_RATE_MESSAGE',
@@ -78,64 +77,48 @@ function HomePage() {
         payload: emptyArray,
       });
     }
-  }, [filter]);
+  }, [filters]);
 
-  function setFilter(value: string) {
+  function setFilter(value: string): void {
     dispatch({
       type: 'SET_FILTER',
       payload: value,
     });
   }
-  function setCheckedInfo(value: number) {
+  function setCheckedInfo(value: number): void {
     dispatch({
       type: 'SET_SELECTED',
       payload: value,
     });
   }
 
-  function setEditMode(value: string) {
-    if (value === 'on') {
-      dispatch({
-        type: 'SET_EDIT_MODE',
-        payload: true,
-      });
-    } else if (value === 'off') {
-      dispatch({
-        type: 'SET_EDIT_MODE',
-        payload: false,
-      });
-    } else {
-      throw new Error('setEditMode value is non valid');
-    }
+  function setEditMode(value: string): void {
+    dispatch({
+      type: 'SET_EDIT_MODE',
+      payload: value === 'on' ? true : false,
+    });
   }
 
-  function setSelectAll(value: string) {
-    if (value === 'select') {
-      dispatch({
-        type: 'SELECT_ALL',
-      });
-    } else if (value === 'unselect') {
-      dispatch({
-        type: 'UNSELECT_ALL',
-      });
-    } else {
-      throw new Error('setSelectAll value is non valid');
-    }
+  function setSelectAll(value: string): void {
+    dispatch({
+      type: value === 'select' ? 'SELECT_ALL' : 'UNSELECT_ALL',
+    });
   }
 
-  function copySelectedUsers(users: UsersInterface[]) {
+  function copySelectedUsers(users: UsersInterface[]): void {
     dispatch({
       type: 'ADD_COPIED_USERS',
       payload: users,
     });
   }
 
-  function deleteSelectedUsers(users: number[]) {
+  function deleteSelectedUsers(users: number[]): void {
     dispatch({
       type: 'SET_DELETE',
       payload: users,
     });
   }
+
   return (
     <div className="home-page">
       <Header />
@@ -149,11 +132,11 @@ function HomePage() {
           deleteSelectedUsers={deleteSelectedUsers}
         />
       )}
-      {isLoading ? (
+      {isLoading && filters ? (
         <Loading />
       ) : (
         <UserCardsList
-          usersList={userInfos}
+          usersList={users}
           selected={selectedItems}
           setEditMode={setEditMode}
           setCheckedInfo={setCheckedInfo}

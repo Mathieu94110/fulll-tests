@@ -1,4 +1,3 @@
-import React from 'react';
 import './UserCardItem.css';
 import { UsersInterface } from 'interfaces/users.interface';
 
@@ -8,15 +7,15 @@ function UserCardItem({
   isEditMode,
 }: {
   userInfos: UsersInterface;
-  setCheckedInfo: Function;
+  setCheckedInfo: (x: number) => void;
   isEditMode: boolean;
 }) {
-  const toggle = () => {
+  function toggle(): void {
     setCheckedInfo(userInfos.id);
-  };
-  const openInNewTab = (url: string): void => {
+  }
+  function openInNewTab(url: string): void {
     window.open(url, '_blank', 'noopener,noreferrer');
-  };
+  }
 
   return (
     <div className="user-card-item box-shadow">

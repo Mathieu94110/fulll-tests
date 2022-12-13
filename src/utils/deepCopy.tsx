@@ -1,6 +1,6 @@
 import { UsersInterface } from 'interfaces/users.interface';
 
-export const deepCopy = (source: UsersInterface[]): UsersInterface[] => {
+export function deepCopy(source: UsersInterface[]): UsersInterface[] {
   return Array.isArray(source)
     ? source.map((item: any) => deepCopy(item))
     : source && typeof source === 'object'
@@ -14,4 +14,4 @@ export const deepCopy = (source: UsersInterface[]): UsersInterface[] => {
         return o;
       }, Object.create(Object.getPrototypeOf(source)))
     : (source as UsersInterface[]);
-};
+}

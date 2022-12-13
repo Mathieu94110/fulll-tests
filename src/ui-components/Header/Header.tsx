@@ -1,4 +1,3 @@
-import React from 'react';
 import './Header.css';
 
 function Header() {
@@ -7,6 +6,6 @@ function Header() {
       <h1>Github Search</h1>
     </div>
   );
-};
+}
 
 export default Header;

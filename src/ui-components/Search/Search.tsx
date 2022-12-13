@@ -1,10 +1,10 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import './Search.css';
 
-function Search({ setFilter }: { setFilter: Function }) {
-  function handleInput(e: ChangeEvent<HTMLInputElement>) {
+function Search({ setFilter }: { setFilter: (x: string) => void }) {
+  function handleInput(e: ChangeEvent<HTMLInputElement>): void {
     const filter = e.currentTarget.value;
-    setFilter(filter);
+    setFilter(filter.trim().toLowerCase());
   }
   return (
     <div className="search">

@@ -1,6 +1,6 @@
-import React, { useRef, ChangeEvent } from 'react';
-import UserCardItem from './Components/UserCardItem/UserCardItem';
-import EditModeButton from './Components/EditModeButton/EditModeButton';
+import { useRef, ChangeEvent } from 'react';
+import UserCardItem from '../../../../ui-components/UserCardItem/UserCardItem';
+import EditModeButton from '../../../../ui-components/EditModeButton/EditModeButton';
 import './UserCardsList.css';
 import { UsersInterface } from '../../../../interfaces/users.interface';
 
@@ -14,32 +14,24 @@ function UserCardsList({
 }: {
   usersList: UsersInterface[];
   selected: UsersInterface[];
-  setCheckedInfo: Function;
-  setSelectAll: Function;
-  setEditMode: Function;
+  setCheckedInfo: (x: number) => void;
+  setSelectAll: (x: string) => void;
+  setEditMode: (x: string) => void;
   isEditMode: boolean;
 }) {
   const isAllCheckedRef = useRef<HTMLInputElement>(null);
 
-  const switchMode = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      setEditMode('on');
-    } else if (!event.target.checked) {
-      setEditMode('off');
-    }
-  };
+  function switchMode(e: ChangeEvent<HTMLInputElement>): void {
+    e.target.checked ? setEditMode('on') : setEditMode('off');
+  }
 
-  const handleCheckedAll = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      setSelectAll('select');
-    } else {
-      setSelectAll('unselect');
-    }
-  };
+  function handleCheckedAll(e: ChangeEvent<HTMLInputElement>): void {
+    e.target.checked ? setSelectAll('select') : setSelectAll('unselect');
+  }
 
-  const setCheckedId = (value: number) => {
+  function setCheckedId(value: number): void {
     setCheckedInfo(value);
-  };
+  }
 
   return (
     <>

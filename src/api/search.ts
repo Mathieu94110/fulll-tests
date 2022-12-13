@@ -1,14 +1,13 @@
 import { GithubApiSearchInterface } from '../interfaces/users.interface';
 
-const baseUrl = 'https://api.github.com/search/users';
+const baseUrl: string = 'https://api.github.com/search/users';
 
 async function getUsersProfiles(
   value: string
 ): Promise<GithubApiSearchInterface | undefined> {
   try {
     const response = await fetch(`${baseUrl}?q=${value}`);
-    const result = response.json();
-    return result;
+    return response.json();
   } catch (err) {
     console.error(err);
   }

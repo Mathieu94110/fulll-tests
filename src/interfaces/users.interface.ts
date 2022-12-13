@@ -27,8 +27,3 @@ export interface GithubApiSearchInterface {
   message: string;
   documentation_url: string;
 }
-
-export interface selectedUsersInterface {
-  id: number;
-  checked: boolean;
-}
