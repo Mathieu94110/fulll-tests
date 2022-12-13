@@ -1,8 +1,8 @@
 import { useEffect, useReducer } from 'react';
 import Header from '../../ui-components/Header/Header';
 import Search from '../../ui-components/Search/Search';
-import ItemGroupsAction from './components/ItemGroupsAction/ItemGroupsAction';
-import UserCardsList from './components/UserCardsList/UserCardsList';
+import ItemGroupsAction from './Components/ItemGroupsAction/ItemGroupsAction';
+import UserCardsList from './Components/UserCardsList/UserCardsList';
 import githubSearchApi from '../../api/search';
 import {
   GithubApiSearchInterface,
